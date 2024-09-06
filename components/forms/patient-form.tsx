@@ -5,16 +5,18 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { Button } from '@/components/ui/button';
-import {
-	Form,
-	FormControl,
-	FormDescription,
-	FormField,
-	FormItem,
-	FormLabel,
-	FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+import { Form } from '@/components/ui/form';
+import CustomFormField from './custom-form-field';
+
+export enum FormFieldType {
+	INPUT = 'input',
+	TEXTAREA = 'textarea',
+	PHONE_INPUT = 'phoneInput',
+	CHECKBOX = 'checkbox',
+	DATE_PICKER = 'datePicker',
+	SELECT = 'select',
+	SKELETON = 'skeleton',
+}
 
 const formSchema = z.object({
 	username: z.string().min(2, {
@@ -38,22 +40,24 @@ const PatientForm = () => {
 
 	return (
 		<Form {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 flex-1'>
-				<FormField
+			<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6 flex-1'>
+				<div>
+					<h2 className='mt-6 text-3xl font-extrabold text-slate-100'>
+						Hi there 👋
+					</h2>
+					<p className='mt-2 text-lg text-muted-foreground'>
+						Schedule your first appointment
+					</p>
+				</div>
+				{/* Pass the control */}
+				<CustomFormField
+					fieldType={FormFieldType.INPUT}
 					control={form.control}
-					name='username'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel className='text-white'>Username</FormLabel>
-							<FormControl>
-								<Input placeholder='shadcn' {...field} />
-							</FormControl>
-							<FormDescription>
-								This is your public display name.
-							</FormDescription>
-							<FormMessage />
-						</FormItem>
-					)}
+					name='name'
+					label='Full name'
+					placeholder='John doe'
+					iconSrc='/icons/user.svg'
+					iconAlt='user'
 				/>
 				<Button type='submit' variant='secondary'>
 					Submit

@@ -19,7 +19,7 @@ export default function Home() {
 					</div>
 					<PatientForm />
 					<div className='flex items-center justify-between text-[14px] leading-[18px] '>
-						<p className='justify-items-end text-gray-600 xl:text-left'>
+						<p className='justify-items-end text-muted-foreground xl:text-left'>
 							&copy; 2024 MedFlow
 						</p>
 						<Link
